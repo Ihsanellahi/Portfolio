@@ -7,19 +7,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="bg-white text-black dark:bg-black dark:text-white transition">
+    <html lang="en" className="dark">
+      <body className="min-h-screen bg-black text-white transition-colors">
 
+        {/* NAVBAR */}
         <Navbar />
 
-        <div className="pt-24">
+        {/* PAGE CONTENT */}
+        <main className="pt-24">
           {children}
-        </div>
+        </main>
 
         {/* WHATSAPP BUTTON */}
         <a
           href="https://wa.me/923177153250"
-          className="fixed bottom-5 right-5 bg-green-500 text-white px-4 py-3 rounded-full shadow-lg"
+          target="_blank"
+          className="fixed bottom-5 right-5 bg-green-500 hover:bg-green-600 transition text-white px-4 py-3 rounded-full shadow-lg z-50"
         >
           Chat
         </a>

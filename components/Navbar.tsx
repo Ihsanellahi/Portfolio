@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
-import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -23,14 +22,15 @@ export default function Navbar() {
     { name: "Contact", path: "/contact" },
   ];
 
-  // Scroll behavior (Apple hide/show)
+  /* ================= SCROLL ================= */
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
 
       setScrolled(currentScroll > 50);
 
-      // Hide on scroll down, show on scroll up
+      if (open) setOpen(false);
+
       if (currentScroll > lastScrollY.current && currentScroll > 100) {
         setHidden(true);
       } else {
@@ -42,24 +42,24 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [open]);
 
   return (
     <motion.nav
       initial={{ y: -80 }}
       animate={{
-        y: hidden ? -120 : 0,
+        y: hidden && !open ? -120 : 0,
         scale: scrolled ? 0.96 : 1,
       }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
       className={`
         fixed top-0 w-full z-50
-        border-b border-gray-200 dark:border-zinc-800
+        border-b border-zinc-800
         transition-all duration-500
         ${
           scrolled
-            ? "py-2 bg-white/70 dark:bg-black/60 backdrop-blur-2xl shadow-lg"
-            : "py-4 bg-white/40 dark:bg-black/30 backdrop-blur-md"
+            ? "py-2 bg-black/70 backdrop-blur-2xl shadow-lg"
+            : "py-4 bg-black/40 backdrop-blur-md"
         }
       `}
     >
@@ -68,11 +68,11 @@ export default function Navbar() {
         {/* LOGO */}
         <h1
           className={`
-            font-bold transition-all duration-500 text-gray-900 dark:text-white
+            font-bold text-white transition-all duration-500
             ${scrolled ? "text-base" : "text-lg"}
           `}
         >
-          Ihsan Ellahi<span className="text-blue-600">.</span>
+          Ihsan Ellahi<span className="text-blue-500">.</span>
         </h1>
 
         {/* DESKTOP MENU */}
@@ -86,32 +86,29 @@ export default function Navbar() {
                   transition-colors duration-300
                   ${
                     pathname === link.path
-                      ? "text-blue-600"
-                      : "text-gray-700 dark:text-gray-300 hover:text-blue-500"
+                      ? "text-blue-400"
+                      : "text-gray-300 hover:text-blue-400"
                   }
                 `}
               >
                 {link.name}
 
-                {/* ACTIVE UNDERLINE (APPLE STYLE) */}
                 {pathname === link.path && (
                   <motion.span
                     layoutId="underline"
-                    className="absolute left-0 -bottom-1 w-full h-[2px] bg-blue-600"
+                    className="absolute left-0 -bottom-1 w-full h-[2px] bg-blue-500"
                   />
                 )}
               </span>
             </Link>
           ))}
 
-          {/* THEME TOGGLE */}
-          <ThemeToggle />
         </div>
 
         {/* MOBILE BUTTON */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-2xl text-gray-900 dark:text-white"
+          className="md:hidden text-2xl text-white"
         >
           ☰
         </button>
@@ -123,18 +120,17 @@ export default function Navbar() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="md:hidden px-6 py-5 space-y-4
-          bg-white/80 dark:bg-black/80 backdrop-blur-2xl
-          border-t border-gray-200 dark:border-zinc-800"
+          bg-black/90 backdrop-blur-2xl
+          border-t border-zinc-800
+          relative z-50"
         >
           {links.map((link, i) => (
             <Link key={i} href={link.path} onClick={() => setOpen(false)}>
-              <p className="text-gray-800 dark:text-gray-200 border-b pb-2">
+              <p className="text-gray-300 border-b border-zinc-800 pb-2 cursor-pointer">
                 {link.name}
               </p>
             </Link>
           ))}
-
-          <ThemeToggle />
         </motion.div>
       )}
     </motion.nav>
