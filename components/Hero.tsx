@@ -35,7 +35,7 @@ export default function Hero() {
           className="relative"
         >
           <div className="absolute inset-0 rounded-full bg-blue-500/20 blur-2xl" />
-
+{/* ihsan first comit */}
           <Image
             src="/ihsan.jpg"
             width={160}
