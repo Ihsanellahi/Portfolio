@@ -3,8 +3,41 @@
 import { motion } from "framer-motion";
 import WorkflowDiagram from "../../components/WorkflowDiagram";
 import { FaUserMd, FaChartLine, FaRobot } from "react-icons/fa";
+import React from "react";
 
-function CaseStudy({ icon, title, problem, solution, steps, diagram, results }) {
+/* ================= TYPES ================= */
+
+type Step = {
+  title: string;
+  desc: string;
+};
+
+type Result = {
+  value: string;
+  label: string;
+};
+
+type CaseStudyProps = {
+  icon: React.ReactNode;
+  title: string;
+  problem: string;
+  solution: string;
+  steps: Step[];
+  diagram: string[];
+  results: Result[];
+};
+
+/* ================= COMPONENT ================= */
+
+function CaseStudy({
+  icon,
+  title,
+  problem,
+  solution,
+  steps,
+  diagram,
+  results,
+}: CaseStudyProps) {
   return (
     <div className="py-20 border-b border-zinc-800 relative z-10">
       <div className="max-w-6xl mx-auto px-6">
@@ -17,7 +50,6 @@ function CaseStudy({ icon, title, problem, solution, steps, diagram, results }) 
 
         {/* PROBLEM vs SOLUTION */}
         <div className="grid md:grid-cols-2 gap-6 mt-8">
-
           <div className="p-6 rounded-2xl bg-red-500/10 border border-red-500/20">
             <h3 className="font-semibold text-red-400">Problem</h3>
             <p className="text-gray-400 mt-2">{problem}</p>
@@ -27,7 +59,6 @@ function CaseStudy({ icon, title, problem, solution, steps, diagram, results }) 
             <h3 className="font-semibold text-green-400">Solution</h3>
             <p className="text-gray-400 mt-2">{solution}</p>
           </div>
-
         </div>
 
         {/* STEPS */}
@@ -79,16 +110,17 @@ function CaseStudy({ icon, title, problem, solution, steps, diagram, results }) 
   );
 }
 
+/* ================= PAGE ================= */
+
 export default function CaseStudies() {
   return (
     <section className="relative overflow-hidden bg-[var(--background)] text-[var(--foreground)] transition-all duration-700">
 
-      {/* 🌌 GLOBAL BACKGROUND */}
+      {/* BACKGROUND */}
       <div className="absolute inset-0 -z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent dark:from-blue-500/20 dark:via-purple-500/20 blur-3xl" />
       </div>
 
-      {/* CONTENT WRAPPER */}
       <div className="relative z-10">
 
         {/* HEADER */}
