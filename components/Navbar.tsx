@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import ThemeToggle from "./ThemeToggle";
 
@@ -18,20 +18,17 @@ export default function Navbar() {
   const links = [
     { name: "Home", path: "/" },
     { name: "Projects", path: "/projects" },
-    { name: "Services", path: "/services" }, // ✅ FIXED
+    { name: "Services", path: "/services" },
     { name: "Case Studies", path: "/case-studies" },
     { name: "Contact", path: "/contact" },
   ];
 
-  /* ================= SCROLL BEHAVIOR ================= */
+  // Scroll behavior (Apple hide/show)
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
 
       setScrolled(currentScroll > 50);
-
-      // ✅ CLOSE MENU ON SCROLL
-      if (open) setOpen(false);
 
       // Hide on scroll down, show on scroll up
       if (currentScroll > lastScrollY.current && currentScroll > 100) {
@@ -45,14 +42,13 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [open]);
+  }, []);
 
   return (
     <motion.nav
       initial={{ y: -80 }}
       animate={{
-        // ✅ PREVENT HIDING WHEN MENU OPEN
-        y: hidden && !open ? -120 : 0,
+        y: hidden ? -120 : 0,
         scale: scrolled ? 0.96 : 1,
       }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
@@ -97,6 +93,7 @@ export default function Navbar() {
               >
                 {link.name}
 
+                {/* ACTIVE UNDERLINE (APPLE STYLE) */}
                 {pathname === link.path && (
                   <motion.span
                     layoutId="underline"
@@ -107,6 +104,7 @@ export default function Navbar() {
             </Link>
           ))}
 
+          {/* THEME TOGGLE */}
           <ThemeToggle />
         </div>
 
@@ -125,13 +123,12 @@ export default function Navbar() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="md:hidden px-6 py-5 space-y-4
-          bg-white/90 dark:bg-black/90 backdrop-blur-2xl
-          border-t border-gray-200 dark:border-zinc-800
-          relative z-50" // ✅ FIXED CLICK ISSUE
+          bg-white/80 dark:bg-black/80 backdrop-blur-2xl
+          border-t border-gray-200 dark:border-zinc-800"
         >
           {links.map((link, i) => (
             <Link key={i} href={link.path} onClick={() => setOpen(false)}>
-              <p className="text-gray-800 dark:text-gray-200 border-b pb-2 cursor-pointer">
+              <p className="text-gray-800 dark:text-gray-200 border-b pb-2">
                 {link.name}
               </p>
             </Link>
