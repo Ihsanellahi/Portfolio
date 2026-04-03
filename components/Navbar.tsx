@@ -76,32 +76,40 @@ export default function Navbar() {
         </h1>
 
         {/* DESKTOP MENU */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
 
-          {links.map((link, i) => (
-            <Link key={i} href={link.path}>
-              <span
-                className={`
-                  relative text-sm font-medium cursor-pointer
-                  transition-colors duration-300
-                  ${
-                    pathname === link.path
-                      ? "text-blue-400"
-                      : "text-gray-300 hover:text-blue-400"
-                  }
-                `}
-              >
-                {link.name}
+          {links.map((link, i) => {
+            const active = pathname === link.path;
 
-                {pathname === link.path && (
-                  <motion.span
-                    layoutId="underline"
-                    className="absolute left-0 -bottom-1 w-full h-[2px] bg-blue-500"
-                  />
-                )}
-              </span>
-            </Link>
-          ))}
+            return (
+              <Link key={i} href={link.path}>
+                <motion.span
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`
+                    relative px-4 py-2 rounded-full text-sm font-medium cursor-pointer
+                    transition-all duration-300
+                    backdrop-blur-xl border
+                    ${
+                      active
+                        ? "bg-blue-500/20 text-blue-400 border-blue-500/40 shadow-lg shadow-blue-500/20"
+                        : "bg-white/5 text-gray-300 border-white/10 hover:bg-blue-500/10 hover:text-blue-400 hover:border-blue-500/30"
+                    }
+                  `}
+                >
+                  {link.name}
+
+                  {/* Glow Effect */}
+                  {active && (
+                    <motion.span
+                      layoutId="nav-glow"
+                      className="absolute inset-0 rounded-full bg-blue-500/10 blur-md -z-10"
+                    />
+                  )}
+                </motion.span>
+              </Link>
+            );
+          })}
 
         </div>
 
@@ -119,18 +127,32 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden px-6 py-5 space-y-4
-          bg-black/90 backdrop-blur-2xl
-          border-t border-zinc-800
-          relative z-50"
+          className="md:hidden px-6 py-6 space-y-4
+          bg-black/95 backdrop-blur-2xl
+          border-t border-zinc-800"
         >
-          {links.map((link, i) => (
-            <Link key={i} href={link.path} onClick={() => setOpen(false)}>
-              <p className="text-gray-300 border-b border-zinc-800 pb-2 cursor-pointer">
-                {link.name}
-              </p>
-            </Link>
-          ))}
+          {links.map((link, i) => {
+            const active = pathname === link.path;
+
+            return (
+              <Link key={i} href={link.path} onClick={() => setOpen(false)}>
+                <motion.div
+                  whileTap={{ scale: 0.95 }}
+                  className={`
+                    px-4 py-3 rounded-xl border cursor-pointer
+                    transition-all duration-300
+                    ${
+                      active
+                        ? "bg-blue-500/20 text-blue-400 border-blue-500/40"
+                        : "bg-white/5 text-gray-300 border-white/10 hover:bg-blue-500/10 hover:text-blue-400"
+                    }
+                  `}
+                >
+                  {link.name}
+                </motion.div>
+              </Link>
+            );
+          })}
         </motion.div>
       )}
     </motion.nav>
