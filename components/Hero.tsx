@@ -7,16 +7,16 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[var(--background)] text-[var(--foreground)] transition-all duration-700">
 
-      {/* 🌌 BACKGROUND GRADIENT (APPLE STYLE) */}
+      {/* 🌌 BACKGROUND GRADIENT */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-transparent dark:from-blue-500/20 dark:via-purple-500/20 blur-3xl" />
 
-        {/* floating blobs */}
         <motion.div
           animate={{ y: [0, -40, 0] }}
           transition={{ duration: 8, repeat: Infinity }}
           className="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl"
         />
+
         <motion.div
           animate={{ y: [0, 40, 0] }}
           transition={{ duration: 10, repeat: Infinity }}
@@ -24,10 +24,10 @@ export default function Hero() {
         />
       </div>
 
-      {/* 🧊 MAIN CONTENT */}
+      {/* MAIN CONTENT */}
       <div className="relative z-10 flex flex-col items-center">
 
-        {/* PROFILE IMAGE (3D FLOAT EFFECT) */}
+        {/* PROFILE IMAGE */}
         <motion.div
           initial={{ opacity: 0, scale: 0.7, rotateX: 20 }}
           animate={{ opacity: 1, scale: 1, rotateX: 0 }}
@@ -35,7 +35,7 @@ export default function Hero() {
           className="relative"
         >
           <div className="absolute inset-0 rounded-full bg-blue-500/20 blur-2xl" />
-{/* ihsan first comit */}
+
           <Image
             src="/ihsan.jpg"
             width={160}
@@ -66,7 +66,7 @@ export default function Hero() {
           manage leads, and optimize workflows using n8n, APIs, and intelligent systems.
         </motion.p>
 
-        {/* CTA BUTTONS */}
+        {/* CTA BUTTONS (SCROLL NAVIGATION) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -74,9 +74,9 @@ export default function Hero() {
           className="mt-10 flex gap-5"
         >
 
-          {/* PRIMARY */}
+          {/* SCROLL TO PROJECTS */}
           <a
-            href="/projects"
+            href="#projects"
             className="px-8 py-3 rounded-full font-medium
             bg-black text-white dark:bg-white dark:text-black
             shadow-lg hover:shadow-blue-500/30
@@ -85,9 +85,9 @@ export default function Hero() {
             View Work →
           </a>
 
-          {/* SECONDARY */}
+          {/* SCROLL TO CONTACT */}
           <a
-            href="/contact"
+            href="#contact"
             className="px-8 py-3 rounded-full font-medium
             border border-gray-300 dark:border-gray-700
             hover:bg-black hover:text-white
@@ -99,7 +99,7 @@ export default function Hero() {
 
         </motion.div>
 
-        {/* SCROLL INDICATOR (APPLE TOUCH) */}
+        {/* SCROLL INDICATOR */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, y: [0, 10, 0] }}
@@ -110,7 +110,6 @@ export default function Hero() {
         </motion.div>
 
       </div>
-
     </section>
   );
 }
