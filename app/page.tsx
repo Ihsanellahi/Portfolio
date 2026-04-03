@@ -5,6 +5,7 @@ import Projects from "./projects/page";
 import Services from "../components/Services";
 import CaseStudies from "./case-studies/page";
 import Contact from "./contact/page";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
@@ -31,6 +32,12 @@ export default function Home() {
       <section id="contact">
         <Contact />
       </section>
+
+      <section >
+        <Footer />
+      </section>
+
+
 
     </div>
   );
