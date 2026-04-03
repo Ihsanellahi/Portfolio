@@ -98,7 +98,7 @@ function CaseStudy({
         {/* CTA */}
         <div className="mt-10">
           <a
-            href="/contact"
+            href="/#contact"
             className="inline-block bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 transition"
           >
             Get This System
