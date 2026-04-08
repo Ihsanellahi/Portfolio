@@ -194,6 +194,27 @@ export default function CaseStudies() {
             { value: "24/7", label: "Support Active" },
           ]}
         />
+        {/* LEAD INTELLIGENCE */}
+          <CaseStudy
+            icon={<FaChartLine />}
+            title="Business Lead Intelligence System"
+            problem="Businesses struggled to identify high-quality leads from large unfiltered datasets, wasting time on low-value prospects."
+            solution="Built an AI-powered lead intelligence system that analyzes, scores, and prioritizes leads automatically for better conversions."
+            diagram={["Data Source", "Webhook", "AI Scoring", "Filtering", "CRM", "Alerts"]}
+            steps={[
+              { title: "Data Collection", desc: "Leads gathered from multiple sources." },
+              { title: "Webhook Trigger", desc: "System activated instantly on new data." },
+              { title: "AI Scoring", desc: "Each lead is analyzed and scored." },
+              { title: "Filtering", desc: "High-quality leads separated automatically." },
+              { title: "CRM Sync", desc: "Qualified leads sent to CRM." },
+              { title: "Alerts", desc: "Instant notifications for hot leads." },
+            ]}
+            results={[
+              { value: "85%", label: "Better Lead Quality" },
+              { value: "3x", label: "Conversion Increase" },
+              { value: "Instant", label: "Lead Processing" },
+            ]}
+          />
 
       </div>
     </section>
