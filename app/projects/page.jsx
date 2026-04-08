@@ -22,6 +22,14 @@ const projects = [
     desc: "Automatically categorizes tickets and sends instant AI-powered responses.",
     image: "/support.png",
   },
+
+  // ➕ NEW PROJECT ADDED
+  {
+    id: "business-lead",
+    title: "Business Lead Generation & Intelligence Agent",
+    desc: "AI-powered n8n system that extracts, enriches, and classifies business leads automatically.",
+    image: "/Business-lead.png",
+  },
 ];
 
 export default function Projects() {
